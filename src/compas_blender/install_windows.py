@@ -37,7 +37,7 @@ def install_windows(blender_path, version=None, packages=None, force_reinstall=F
         The path to the folder with the version number of Blender.
         For example, on Mac: ``'/Applications/Blender.app/Contents/Resources/2.83'``.
         On Windows: ``'%PROGRAMFILES%/Blender Foundation/Blender 2.83/2.83'``.
-    version : {'2.83', '2.93', '3.1'}, optional
+    version : {'2.83', '2.93', '3.3'}, optional
         The version number of Blender.
         Default is ``'2.93'``.
     packages : list[str], optional
@@ -52,36 +52,39 @@ def install_windows(blender_path, version=None, packages=None, force_reinstall=F
     --------
     .. code-block:: bash
 
-        $ python -m compas_blender.install
+        $ python -m compas_blender.install_windows
 
     .. code-block:: bash
 
-        $ python -m compas_blender.install -v 2.93
+        $ python -m compas_blender.install_windows -v 3.3
 
     .. code-block:: bash
 
-        $ python -m compas_blender.install /Applications/Blender.app/Contents/Resources/2.93
+        $ python -m compas_blender.install_windows /Applications/Blender.app/Contents/Resources/3.3
 
     """
     if not compas.WINDOWS:
         print(
-            "This install procedure is only suited for installations on Windows. Please use the basic install instead..."
+            "This install procedure is only suited for installations on Windows. "
+            "Please use the basic install instead..."
         )
         sys.exit(-1)
 
     if not version and not blender_path:
-        version = "2.93"
+        version = "3.3"
 
     if version and blender_path:
         print(
-            "Both options cannot be provided simultaneously. Provide the full installation path, or the version with flag -v."
+            "Both options cannot be provided simultaneously. "
+            "Provide the full installation path, or the version with flag -v."
         )
         sys.exit(-1)
 
     if version:
         if compas.LINUX:
             print(
-                "Version-based installs are currently not supported for Linux. Please provide the full installation path with the -p option."
+                "Version-based installs are currently not supported for Linux. "
+                "Please provide the full installation path with the -p option."
             )
             sys.exit(-1)
 
@@ -146,7 +149,8 @@ def install_windows(blender_path, version=None, packages=None, force_reinstall=F
     # environment_name = os.environ.get("CONDA_DEFAULT_ENV", "")
 
     # Get current sys.version value, we will override it inside Blender
-    # because it seems Blender overrides it as well, but doing so breaks many things after having replaced the Python interpreter
+    # because it seems Blender overrides it as well,
+    # but doing so breaks many things after having replaced the Python interpreter
 
     # _handle, bootstrapper_temp_path = tempfile.mkstemp(suffix=".py", text=True)
 
@@ -179,7 +183,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-v",
         "--version",
-        choices=["2.83", "2.93", "3.1"],
+        choices=["2.83", "2.93", "3.3"],
         help="The version of Blender to install COMPAS in.",
     )
     parser.add_argument("-p", "--packages", nargs="+", help="The packages to install.")

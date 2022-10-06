@@ -20,36 +20,40 @@ def uninstall(blender_path, version=None):
         The path to the folder with the version number of Blender.
         For example, on Mac: ``'/Applications/Blender.app/Contents/Resources/2.83'``.
         On Windows: ``'%PROGRAMFILES%/Blender Foundation/Blender 2.83/2.83'``.
-    version : {'2.83', '2.93', '3.1'}, optional
+    version : {'2.83', '2.93', '3.3'}, optional
         The version number of Blender.
-        Default is ``'2.93'``.
+        Default is ``'3.3'``.
 
     Examples
     --------
     .. code-block:: bash
 
-        $ python -m compas_blender.uninstall /Applications/blender.app/Contents/Resources/2.80
+        $ python -m compas_blender.uninstall /Applications/blender.app/Contents/Resources/2.83
 
     """
     if not os.environ.get("CONDA_PREFIX"):
         print(
-            "Conda environment not found. The installation into Blender requires an active conda environment with a matching Python version to continue."
+            "Conda environment not found. "
+            "The installation into Blender requires an active conda environment "
+            "with a matching Python version to continue."
         )
         sys.exit(-1)
 
     if not version and not blender_path:
-        version = "2.93"
+        version = "3.3"
 
     if version and blender_path:
         print(
-            "Both options cannot be provided simultaneously. Provide the full installation path, or the version with flag -v."
+            "Both options cannot be provided simultaneously. "
+            "Provide the full installation path, or the version with flag -v."
         )
         sys.exit(-1)
 
     if version:
         if compas.LINUX:
             print(
-                "Version-based installs are currently not supported for Linux. Please provide the full installation path with the -p option."
+                "Version-based installs are currently not supported for Linux. "
+                "Please provide the full installation path with the -p option."
             )
             sys.exit(-1)
 
@@ -106,7 +110,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-v",
         "--version",
-        choices=["2.83", "2.93", "3.1"],
+        choices=["2.83", "2.93", "3.3"],
         help="The version of Blender to install COMPAS in.",
     )
 

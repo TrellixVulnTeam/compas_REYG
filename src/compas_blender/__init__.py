@@ -55,10 +55,10 @@ __version__ = "1.16.0"
 
 
 def _check_blender_version(version):
-    supported_versions = ["2.83", "2.93", "3.1"]
+    supported_versions = ["2.83", "2.93", "3.3"]
 
     if not version:
-        return "2.93"
+        return "3.3"
 
     if version not in supported_versions:
         raise Exception("Unsupported Blender version: {}".format(version))
